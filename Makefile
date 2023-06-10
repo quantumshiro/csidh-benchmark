@@ -41,6 +41,14 @@ $(EXEC): $(COBJ) $(CPPOBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+# Run rule
+run: 
+	@if [ -f $(EXEC) ]; then \
+		./$(EXEC); \
+	else \
+		$(MAKE) all && ./$(EXEC); \
+	fi
+
 # Clean rule
 clean:
 	rm -f $(COBJ) $(CPPOBJ) $(EXEC)
