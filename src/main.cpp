@@ -64,5 +64,10 @@ int main() {
     fp_print(&shared_bob.A);
     std::cout << std::endl;
 
+    if (memcmp(&shared_alice.A, &shared_bob.A, sizeof(fp)) == 0)
+        std::cout << "Alice and Bob agree on shared secret!" << std::endl;
+    else
+        std::cout << "Alice and Bob disagree on shared secret!" << std::endl;
+
     return 0;
 }
