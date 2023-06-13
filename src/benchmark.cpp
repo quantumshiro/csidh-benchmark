@@ -1,4 +1,4 @@
-#include "../benchmark/include/benchmark/benchmark.h"
+#include <benchmark/benchmark.h>
 
 #include <iostream>
 #include <vector>
@@ -36,3 +36,5 @@ static void create_keys(benchmark::State& state) {
 }
 
 BENCHMARK(create_keys);
+
+BENCHMARK_MAIN();

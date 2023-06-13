@@ -15,17 +15,18 @@ INCLUDES = -I./src/include
 
 # C++ Source Files
 CPPSRC = src/main.cpp
-
+BENCHSRC = src/benchmark.cpp
 # C Source Files
 CSRC = src/constants.c src/csidh.c src/fp.c src/mont.c src/rng.c src/uint.c
 
 # Object Files
 CPPOBJ = $(CPPSRC:.cpp=.o)
 COBJ = $(CSRC:.c=.o)
+BENCHOBJ = $(BENCHSRC:.cpp=.o)
 
 # Executable Name
 EXEC = main
-
+BENCH_EXC = benchmark
 # Default rule
 all: $(EXEC)
 
@@ -40,6 +41,10 @@ $(EXEC): $(COBJ) $(CPPOBJ)
 # Rule for C object files
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+# Rule for benchmark
+bench: $(COBJ) $(BENCHOBJ)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -lbenchmark -lpthread -o $(BENCH_EXEC) $^
 
 # Run rule
 run: 
