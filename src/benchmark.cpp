@@ -12,29 +12,19 @@ extern "C" {
     #include "include/fp.h"
     #include "include/csidh.h"
     #include "include/params.h"
+    #include "include/mont.h"
+    #include "include/rng.h"
+    #include "include/uint.h"
 }
 
-void uint_print(const unit* x)
-{
-    for (size_t i = 8 * LIMBS; i != SIZE_MAX; --i)
-        std::cout << std::setfill('0') << std::setw(2) << std::hex << static_cast<int>((reinterpret_cast<const unsigned char*>(x->c))[i]);
-}
-
-void fp_print(const fp* x)
-{
-    unit y;
-    fp_dec(&y, x);
-    uint_print(&y);
-}
-
-static void create_keys(benchmark::State& state) {
-    private_key priv_alice;
-
+static void bench_RandomBytes(benchmark::State& state) {
     for (auto _ : state) {
-        csidh_private(&priv_alice);
+        uint8_t x[32];
+        randombytes(x, 32);
     }
 }
 
-BENCHMARK(create_keys);
+BENCHMARK(bench_RandomBytes);
+
 
 BENCHMARK_MAIN();

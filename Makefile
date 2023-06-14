@@ -26,7 +26,7 @@ BENCHOBJ = $(BENCHSRC:.cpp=.o)
 
 # Executable Name
 EXEC = main
-BENCH_EXC = benchmark
+BENCH_EXEC = bench
 # Default rule
 all: $(EXEC)
 
@@ -43,9 +43,9 @@ $(EXEC): $(COBJ) $(CPPOBJ)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # Rule for benchmark
-bench: $(COBJ) $(BENCHOBJ)
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -lbenchmark -lpthread -o $(BENCH_EXEC) $^
-
+$(BENCH_EXEC): $(COBJ) $(BENCHOBJ)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -L/usr/lib -lbenchmark -lpthread -o $@ $^
+bench: $(BENCH_EXEC)
 # Run rule
 run: 
 	@if [ -f $(EXEC) ]; then \
@@ -56,6 +56,6 @@ run:
 
 # Clean rule
 clean:
-	rm -f $(COBJ) $(CPPOBJ) $(EXEC)
+	rm -f $(COBJ) $(CPPOBJ) $(BENCHOBJ) $(EXEC) $(BENCH_EXEC)
 
 .PHONY: all clean

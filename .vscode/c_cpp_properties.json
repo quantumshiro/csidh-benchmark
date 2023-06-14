@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/benchmark/include",
+                "/usr/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
