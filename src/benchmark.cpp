@@ -233,4 +233,22 @@ static void bench_mont_ISOG(benchmark::State& state) {
     }
 }
 BENCHMARK(bench_mont_ISOG);
+
+static void bench_csidh_private(benchmark::State& state) {
+    private_key priv;
+    for (auto _ : state) {
+        csidh_private(&priv);
+    }
+}
+BENCHMARK(bench_csidh_private);
+
+static void bench_csidh(benchmark::State& state) {
+    private_key priv_alice;
+    csidh_private(&priv_alice);
+    public_key pub_alice;
+    for (auto _ : state) {
+        csidh(&pub_alice, &base, &priv_alice);
+    }
+}
+BENCHMARK(bench_csidh);
 BENCHMARK_MAIN();
