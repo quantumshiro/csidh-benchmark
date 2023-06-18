@@ -9,7 +9,6 @@ extern const fp fp_0;
 extern const fp fp_1;
 
 void fp_set(fp *x, uint64_t y);
-void fp_cswap(fp *x, fp *y, bool c);
 
 void fp_enc(fp *x, unit const *y); /* encode to Montgomery representation */
 void fp_dec(unit *x, fp const *y); /* decode from Montgomery representation */
