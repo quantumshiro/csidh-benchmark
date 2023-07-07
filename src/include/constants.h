@@ -10,5 +10,5 @@ extern const uint64_t inv_min_p_mod_r;
 extern const unit p_minus_2;
 extern const unit p_minus_1_halves;
 extern const unit four_sqrt_p;
-
+extern const unit r_mod_p;
 #endif
