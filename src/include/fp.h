@@ -82,13 +82,11 @@ static void get_priv(uint64_t *r, uint64_t *priv, int pos, int NUM) {
 }
 
 // constant-time comparison: -1 if x < y, 0 otherwise.
-static int cmp(uint64_t *x, uint64_t *y, int NUM) {
-  uint64_t r = 0;
-  for (int i = 0; i < NUM; i++) {
-    r |= x[i] ^ y[i];
-  }
-  r = -r;
-  r = r >> 63;
-  return (int)(1 - r);
+static int32_t isSmaller(int32_t x, int32_t y)
+{
+  int32_t xy = x ^ y;
+  int32_t c = x - y;
+  c ^= xy & (c ^ x);
+  return (c >> 31);
 }
 #endif
