@@ -37,11 +37,58 @@ void fp_random(fp *x);
 #define copy(x, y, NUM) memcpy(x, y, sizeof(uint64_t)*NUM);
 
 
-static inline int compare(fp *x, fp *y, int NUM) {
-  for (int i = NUM - 1; i >= 0; i--)
+static inline int compare(uint64_t *x, uint64_t *y, int NUM) {
+  for (int i = NUM - 1; i >= 0; i--) {
     if (x[i] != y[i]) return x[i] > y[i] ? 1:-1;
+  }
   return 0;
 }
 
-static inline int iszero(fp *x, )
+static inline int iszero(uint64_t *x, int NUM) {
+  uint64_t c = 0;
+  for (int i = NUM - 1; i > 0; i--) {
+    c |= x[i];
+  }
+  return c == 0;
+}
+
+static void cmov(int8_t *r, const int8_t a, uint32_t b) {
+  uint32_t t;
+  b = -b;
+  t = (*r ^ a) & b;
+  *r ^= t;
+}
+
+/* check if a and b are equal in constant time  */
+static int is_equal(uint64_t *a, uint64_t *b, int NUM) {
+  uint64_t r = 0;
+  for (int i = 0; i < NUM; i++) {
+    r |= a[i] ^ b[i];
+  }
+  r = -r;
+  r = r >> 63;
+  return (int)(1 - r);
+}
+
+// /* get priv[pos] in constant time  */
+static void get_priv(uint64_t *r, uint64_t *priv, int pos, int NUM) {
+  uint64_t mask = 0;
+  for (int i = 0; i < NUM; i++) {
+    mask |= (i == pos) ? 0 : priv[i];
+  }
+  for (int i = 0; i < NUM; i++) {
+    r[i] = priv[i] & mask;
+  }
+}
+
+// constant-time comparison: -1 if x < y, 0 otherwise.
+static int cmp(uint64_t *x, uint64_t *y, int NUM) {
+  uint64_t r = 0;
+  for (int i = 0; i < NUM; i++) {
+    r |= x[i] ^ y[i];
+  }
+  r = -r;
+  r = r >> 63;
+  return (int)(1 - r);
+}
 #endif
