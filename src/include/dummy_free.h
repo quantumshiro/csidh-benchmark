@@ -26,4 +26,9 @@ static uint8_t BATCH_2[] = { 2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, 57, 62, 6
 static uint8_t BATCH_3[] = { 3, 8, 13, 18, 23, 28, 33, 38, 43, 48, 53, 58, 63, 68, 73 };
 static uint8_t BATCH_4[] = { 4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69 };
 
+static uint8_t SIZE_EACH_BATCH[BATCHES] = { 15, 15, 15, 15, 14 };
+static uint8_t *BATCH[BATCHES] = { BATCH_0, BATCH_1, BATCH_2, BATCH_3, BATCH_4 };
+
+
+
 #endif // __DUMMY_FREE_H__
