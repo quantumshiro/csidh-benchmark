@@ -1,3 +1,5 @@
+#include <cstring>
+
 extern "C" {
     #include "include/mont.h"
     #include "include/fp.h"
@@ -30,4 +32,19 @@ void random_key(uint8_t key[]) {
 }
 
 void action_eval(proj C, const uint8_t key[], const proj A) {
+    uint8_t batches[BATCHES][SIZE_EACH_BATCH[0]];
+    uint8_t size_each_batch[BATCHES];
+
+    for (uint8_t i = 0; i < BATCHES; i++) {
+        std::memcpy(batches[i], BATCH[i], sizeof(uint8_t) + SIZE_EACH_BATCH[i]);
+    }
+
+    std::memcpy(size_each_batch, SIZE_EACH_BATCH, sizeof(uint8_t) * BATCHES);
+
+    uint8_t complement_each_batch[BATCHES][N];
+    uint8_t size_complement_each_batch[BATCHES];
+
+    std::memcpy(complement_each_batch, COMPLEMENT_EACH_BATCH, sizeof(uint8_t) * BATCHES);
+
+    
 }
