@@ -37,9 +37,9 @@ void fp_random(fp *x);
 #define copy(x, y, NUM) memcpy(x, y, sizeof(uint64_t)*NUM);
 
 
-static inline int compare(uint64_t *x, uint64_t *y, int NUM) {
+static inline int compare(uint64_t *x, unit y, int NUM) {
   for (int i = NUM - 1; i >= 0; i--) {
-    if (x[i] != y[i]) return x[i] > y[i] ? 1:-1;
+    if (x[i] != y.c[i]) return x[i] > y.c[i] ? 1:-1;
   }
   return 0;
 }

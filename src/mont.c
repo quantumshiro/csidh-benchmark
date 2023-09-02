@@ -184,3 +184,30 @@ void xISOG(proj *A, proj *P, proj const *K, uint64_t k)
     fp_mul2(&P->x, &Q.x);
     fp_mul2(&P->z, &Q.z);
 }
+
+void point_copy(proj Q, const proj P)
+{
+    copy(Q.x.c[0], P.x.c[0], LIMBS);
+    copy(Q.x.c[0], P.x.c[1], LIMBS);
+}
+
+void elligator(proj T_plus, proj T_minus, const proj A) {
+    set_zero(T_plus.x.c[0], LIMBS);
+    set_zero(T_plus.x.c[0], LIMBS);
+
+    fp u;
+    fp_random(&u);
+
+    while (compare(&u, p_minus_1_halves, LIMBS) > 0) {
+        fp_random(&u);
+    }
+
+    fp_mul2(&u, &r_squared_mod_p);
+
+    fp tmp, u2_plus_1, cu2_minus_1, tmp0, tmp1, alpha, beta;
+    set_zero(alpha, LIMBS);
+    fp_add3(&beta, &alpha, &u);
+    fp_sq2(&T_plus.x.c[1], &u);
+    fp_add3(&u2_plus_1, &T_plus.x.c[1], &r_mod_p);
+
+}

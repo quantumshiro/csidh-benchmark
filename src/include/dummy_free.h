@@ -30,6 +30,9 @@ static uint8_t SIZE_EACH_BATCH[BATCHES] = { 15, 15, 15, 15, 14 };
 static uint8_t *BATCH[BATCHES] = { BATCH_0, BATCH_1, BATCH_2, BATCH_3, BATCH_4 };
 
 static uint8_t LAST_ISOGENY[BATCHES] = { 59, 59, 59, 59, 60 };
+static uint16_t ISOGENIES = 763;
+
+static uint8_t SIZE_EACH_COMPLEMENT_BATCH[BATCHES] = {59, 59, 59, 59, 60};
 static uint8_t COMPLEMENT_EACH_BATCH[BATCHES][N] = {
     {  
         1,  2,  3,  4, 
