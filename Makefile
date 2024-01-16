@@ -5,10 +5,10 @@ CXX = clang++
 CC = clang
 
 # C++ Compiler Flags
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -Ofast -Wall -Wextra -std=c++17
 
 # C Compiler Flags
-CFLAGS = -Wall -Wextra -std=c11
+CFLAGS = -Ofast -Wall -Wextra -std=c11
 
 # Include Paths
 INCLUDES = -I./src/include
