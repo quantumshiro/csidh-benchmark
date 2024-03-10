@@ -1,4 +1,4 @@
-#include "rng.h"
+#include "include/rng.h"
 
 #include <stdlib.h>
 #include <unistd.h>

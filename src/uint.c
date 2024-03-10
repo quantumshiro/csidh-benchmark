@@ -1,7 +1,7 @@
 #include <stddef.h>
 
 #include "include/params.h"
-#include "uint.h"
+#include "include/uint.h"
 
 /* assumes little-endian throughout. */
 

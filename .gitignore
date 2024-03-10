@@ -2,3 +2,5 @@
 !*/
 !*.*
 *.o
+zig-out/
+zig-cache/
