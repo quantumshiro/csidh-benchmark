@@ -6,11 +6,12 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "csidh_benchmark",
+        .root_source_file = .{ .path = "src/main.zig" },
         .target = target,
         .optimize = optimize,
     });
     exe.addIncludePath(.{ .path = "src/include" });
-    exe.addCSourceFile(.{ .file = .{ .path = "src/main.cpp" }, .flags = &.{ "-Wall", "-Wextra" } });
+    // exe.addCSourceFile(.{ .file = .{ .path = "src/main.cpp" }, .flags = &.{ "-Wall", "-Wextra" } });
     exe.addCSourceFiles(.{
         .files = &.{
             "src/constants.c",
