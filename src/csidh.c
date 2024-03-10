@@ -145,8 +145,7 @@ void action(public_key *out, public_key const *in, private_key const *priv)
 
     for (size_t i = 0; i < NUM_PRIMES; ++i) {
 
-        int8_t t = (int8_t) (priv->e[i / 2] << i % 2 * 4) >> 4;
-
+        int8_t t = (int8_t) ((uint8_t)priv->e[i / 2] << i % 2 * 4) >> 4;
         if (t > 0) {
             e[0][i] = t;
             e[1][i] = 0;

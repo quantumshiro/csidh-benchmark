@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     exe.addIncludePath(.{ .path = "src/include" });
-    exe.addCSourceFile(.{ .file = .{ .path = "src/main.cpp" } });
+    exe.addCSourceFile(.{ .file = .{ .path = "src/main.cpp" }, .flags = &.{ "-Wall", "-Wextra" } });
     exe.addCSourceFiles(.{
         .files = &.{
             "src/constants.c",
@@ -23,7 +23,6 @@ pub fn build(b: *std.Build) void {
     });
     exe.linkLibC();
     exe.linkLibCpp();
-    exe.linkSystemLibrary("c");
 
     b.installArtifact(exe);
 
