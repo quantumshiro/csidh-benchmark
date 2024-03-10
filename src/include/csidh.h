@@ -16,6 +16,6 @@ typedef struct public_key {
 extern const public_key base;
 
 void csidh_private(private_key *priv);
-bool csidh(public_key *out, public_key const *in, private_key const *priv);
+void csidh(public_key *out, public_key const *in, private_key const *priv);
 
 #endif

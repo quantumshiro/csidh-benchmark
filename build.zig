@@ -21,9 +21,10 @@ pub fn build(b: *std.Build) void {
             "src/rng.c",
             "src/uint.c",
         },
+        .flags = &.{ "-Wall", "-Wextra" },
     });
     exe.linkLibC();
-    exe.linkLibCpp();
+    // exe.linkLibCpp();
 
     b.installArtifact(exe);
 

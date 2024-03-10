@@ -223,12 +223,10 @@ void action(public_key *out, public_key const *in, private_key const *priv)
 }
 
 /* includes public-key validation. */
-bool csidh(public_key *out, public_key const *in, private_key const *priv)
+void csidh(public_key *out, public_key const *in, private_key const *priv)
 {
     if (!validate(in)) {
         fp_random(&out->A);
-        return false;
     }
     action(out, in, priv);
-    return true;
 }
