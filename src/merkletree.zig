@@ -5,16 +5,16 @@ const sha256 = crypto.hash.sha3.Sha3_256;
 const Hash = [32]u8;
 
 pub fn leafHash(data: []u8) Hash {
-    const h: Hash = undefined;
-    sha256.hash(data, h);
+    var h: Hash = undefined;
+    sha256.hash(data[0..], h[0..], .{});
     return h;
 }
 
 pub fn nodeHash(left: Hash, right: Hash) Hash {
-    const buf: [64]u8 = undefined;
-    std.mem.copyBackwards(u8, buf, left);
-    std.mem.copyBackwards(u8, buf, right);
-    return leafHash(buf);
+    var buf: [64]u8 = undefined;
+    std.mem.copyBackwards(u8, buf[0..32], left[0..]);
+    std.mem.copyBackwards(u8, buf[32..], right[0..]);
+    return leafHash(buf[0..]);
 }
 
 const Forest = struct {
@@ -28,7 +28,7 @@ const Forest = struct {
     }
 
     pub fn init() self {
-        const ctx: self = undefined;
+        var ctx: self = undefined;
         ctx.reset();
         return ctx;
     }
@@ -52,7 +52,7 @@ const Forest = struct {
         var r: Hash = ctx.trees[i];
         i += 1;
         while (i < 64) : (i += 1) {
-            if (ctx.hight(@intCast(@as(u6, i)))) {
+            if (ctx.hight(@intCast(@as(u8, i)))) {
                 r = nodeHash(ctx.trees[i], r);
             }
         }
